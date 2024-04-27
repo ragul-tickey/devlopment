@@ -14,7 +14,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'cp -r * /var/www/html' // Assuming your build outputs to current directory
+                script {
+                    sh 'rm -rf /var/www/html/*' // Clear existing files in /var/www/html
+                    sh 'cp -r . /var/www/html' // Copy files to /var/www/html
+                }
             }
         }
     }
